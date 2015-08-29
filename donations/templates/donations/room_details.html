@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'donations/style.css' %}" />
+
+<h3> Total money raised so far: ${{total}} </h3>
+<table id="tRoom">
+    <caption>Donations collected per room</caption>
+{% if rooms_list %}
+        {% for room in rooms_list %}
+            {% if forloop.first %} 
+        <th>Details Link</th> 
+        <th>Room Name</th> 
+        <th>Teacher Name</th> 
+        <th>Grade</th> 
+        <th>Number of Students</th> 
+        <th>Total donations</th>
+            {% endif %}
+    <tr>
+        <td><a href="{% url 'room_detail' '15' %}">details</a></td> <td>{{room.name}}</td> <td>{{room.teacher}}</td> <td>{{room.grade}}</td> <td>{{room.num_students}}</td> <td>{{room.room_total}}</td>
+    </tr>
+        {% endfor %}
+{% else %}
+    <tr>
+        <p>No rooms have been defined yet.</p>
+    </tr>
+{% endif %}
+</table>

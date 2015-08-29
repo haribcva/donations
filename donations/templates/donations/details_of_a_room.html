@@ -1,0 +1,37 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'donations/style.css' %}" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="{% static 'donations/jquery.tablesorter.js' %}"></script>
+<script src="{% static 'donations/table.js' %}"></script>
+
+<h3> Details of room {{room_name}}</h3>
+<table id="tRoom">
+    <caption>Donations collected by room {{room_name}}</caption>
+{% if details_list %}
+        {% for coin in details_list %}
+            {% if forloop.first %} 
+    <thead>
+    <tr>
+        <th>Week</th> 
+        <th>Num Pennies</th> 
+        <th>Num Nickels</th> 
+        <th>Num Dimes</th> 
+        <th>Number of Quaters</th> 
+        <th>Number of Dollars</th> 
+        <th>Total donations</th>
+    </tr>
+    </thead>
+    <tbody>
+            {% endif %}
+
+    <tr>
+        <td>{{coin.week}}</td> <td>{{coin.numPenny}}</td> <td>{{coin.numNickel}}</td> <td>{{coin.numDime}}</td> <td>{{coin.numQuaters}}</td> <td>{{coin.numDollars}}</td> <td>{{coin.total}}</td>
+    </tr>
+        {% endfor %}
+{% else %}
+    <tr>
+        <p>No such room exists.</p>
+    </tr>
+{% endif %}
+    </tbody>
+</table>
